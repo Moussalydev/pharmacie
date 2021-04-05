@@ -2,12 +2,14 @@ package com.moussalydev.pharmacie.service.impl;
 
 import com.moussalydev.pharmacie.domain.Vente;
 import com.moussalydev.pharmacie.repository.VenteRepository;
+import com.moussalydev.pharmacie.service.StockService;
 import com.moussalydev.pharmacie.service.VenteService;
 import com.moussalydev.pharmacie.service.dto.VenteDTO;
 import com.moussalydev.pharmacie.service.mapper.VenteMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class VenteServiceImpl implements VenteService {
 
     private final VenteMapper venteMapper;
 
+    @Autowired
+    private StockService stockService;
+
     public VenteServiceImpl(VenteRepository venteRepository, VenteMapper venteMapper) {
         this.venteRepository = venteRepository;
         this.venteMapper = venteMapper;
@@ -35,7 +40,8 @@ public class VenteServiceImpl implements VenteService {
     public VenteDTO save(VenteDTO venteDTO) {
         log.debug("Request to save Vente : {}", venteDTO);
         Vente vente = venteMapper.toEntity(venteDTO);
-        vente = venteRepository.save(vente);
+        // vente = venteRepository.save(vente);
+        vente = stockService.Vendre(vente);
         return venteMapper.toDto(vente);
     }
 
