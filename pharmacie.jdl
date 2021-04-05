@@ -1,0 +1,31 @@
+entity Medicament {
+	nom String required,
+    prix Double required,
+    cible Sujet,
+    stock Integer required
+}
+enum Sujet {
+    Enfant, Adulte, Tous
+}
+entity Categorie{
+	nom String required
+
+}
+entity Vente {
+	date ZonedDateTime,
+    nombre Integer
+}
+
+relationship ManyToOne {
+	Medicament{categorie(nom)} to Categorie,
+    Medicament{user(login)} to User,
+    Vente{medicament(nom)} to Medicament
+  	
+}
+paginate Vente, Medicament with pagination
+dto * with mapstruct
+service all with serviceImpl
+
+
+
+

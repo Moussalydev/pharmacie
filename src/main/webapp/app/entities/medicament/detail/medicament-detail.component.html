@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="medicament">
+      <h2 data-cy="medicamentDetailsHeading"><span>Medicament</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ medicament.id }}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+          <span>{{ medicament.nom }}</span>
+        </dd>
+        <dt><span>Prix</span></dt>
+        <dd>
+          <span>{{ medicament.prix }}</span>
+        </dd>
+        <dt><span>Cible</span></dt>
+        <dd>
+          <span>{{ medicament.cible }}</span>
+        </dd>
+        <dt><span>Stock</span></dt>
+        <dd>
+          <span>{{ medicament.stock }}</span>
+        </dd>
+        <dt><span>Categorie</span></dt>
+        <dd>
+          <div *ngIf="medicament.categorie">
+            <a [routerLink]="['/categorie', medicament.categorie?.id, 'view']">{{ medicament.categorie?.nom }}</a>
+          </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ medicament.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/medicament', medicament.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

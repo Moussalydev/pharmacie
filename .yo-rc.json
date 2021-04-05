@@ -42,7 +42,9 @@
     "jwtSecretKey": "ZDg2MzU3ZmFmMWFlYzM3YTBjNThkNmI4YmNmNjkwZWZmZDA4YTcwNzA2NzM4NjBkNmI2NjhjOGExYjVlN2FiNDJiYmY3ODYyMTQwNTg0ZWZhMmQxM2E2Yjc3YzAzNDNkMmJiMWZlNmM1YTA0YmExNzNmMDY0Y2I5ZGYwMzJiYzQ=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Medicament", "Categorie", "Vente"],
+    "lastLiquibaseTimestamp": 1617621280000
   },
   "git-provider": "GitHub",
   "git-company": "Moussalydev",

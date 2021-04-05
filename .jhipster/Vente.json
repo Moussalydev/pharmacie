@@ -1,0 +1,32 @@
+{
+  "name": "Vente",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "nombre",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "medicament",
+      "otherEntityRelationshipName": "vente",
+      "relationshipName": "medicament",
+      "otherEntityField": "nom"
+    }
+  ],
+  "entityTableName": "vente",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210405111440"
+}
