@@ -3,6 +3,7 @@ package com.moussalydev.pharmacie.service.impl;
 import com.moussalydev.pharmacie.domain.Medicament;
 import com.moussalydev.pharmacie.repository.MedicamentRepository;
 import com.moussalydev.pharmacie.service.MedicamentService;
+import com.moussalydev.pharmacie.service.UserService;
 import com.moussalydev.pharmacie.service.dto.MedicamentDTO;
 import com.moussalydev.pharmacie.service.mapper.MedicamentMapper;
 import java.util.Optional;
@@ -24,18 +25,21 @@ public class MedicamentServiceImpl implements MedicamentService {
 
     private final MedicamentRepository medicamentRepository;
 
+    private final UserService userService;
+
     private final MedicamentMapper medicamentMapper;
 
-    public MedicamentServiceImpl(MedicamentRepository medicamentRepository, MedicamentMapper medicamentMapper) {
+    public MedicamentServiceImpl(MedicamentRepository medicamentRepository, MedicamentMapper medicamentMapper, UserService userService) {
         this.medicamentRepository = medicamentRepository;
         this.medicamentMapper = medicamentMapper;
+        this.userService = userService;
     }
 
     @Override
     public MedicamentDTO save(MedicamentDTO medicamentDTO) {
         log.debug("Request to save Medicament : {}", medicamentDTO);
         Medicament medicament = medicamentMapper.toEntity(medicamentDTO);
-        medicament = medicamentRepository.save(medicament);
+        medicament = medicamentRepository.save(medicament.user(userService.getUserWithAuthorities().get()));
         return medicamentMapper.toDto(medicament);
     }
 
