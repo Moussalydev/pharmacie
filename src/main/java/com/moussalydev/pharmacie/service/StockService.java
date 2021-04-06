@@ -4,6 +4,7 @@ import com.moussalydev.pharmacie.domain.Medicament;
 import com.moussalydev.pharmacie.domain.Vente;
 import com.moussalydev.pharmacie.repository.MedicamentRepository;
 import com.moussalydev.pharmacie.repository.VenteRepository;
+import java.time.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,15 @@ public class StockService {
 
     private Integer newstock;
 
+    ZonedDateTime maintenant = ZonedDateTime.now();
+
     public StockService(VenteRepository venteRepository, MedicamentRepository medicamentRepository) {
         this.venteRepository = venteRepository;
         this.medicamentRepository = medicamentRepository;
     }
 
     public Vente Vendre(Vente vente) {
+        vente.setDate(maintenant);
         vente = venteRepository.save(vente);
         Medicament medicament = medicamentRepository.findById(vente.getMedicament().getId()).get();
         newstock = medicament.getStock() - vente.getNombre();
