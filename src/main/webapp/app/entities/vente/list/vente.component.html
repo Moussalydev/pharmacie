@@ -35,7 +35,7 @@
           <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="total"><span>Total</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="total"><span>Total(FCA)</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="medicament.nom"><span>Medicament</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
@@ -47,7 +47,7 @@
           </td>
           <td>{{ vente.date | formatMediumDatetime }}</td>
           <td>{{ vente.nombre }}</td>
-          <td>{{ vente.total }}</td>
+          <td>{{ vente.total }} FCA</td>
           <td>
             <div *ngIf="vente.medicament">
               <a [routerLink]="['/medicament', vente.medicament?.id, 'view']">{{ vente.medicament?.nom }}</a>

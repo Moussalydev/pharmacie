@@ -5,6 +5,7 @@ import com.moussalydev.pharmacie.security.SecurityUtils;
 import com.moussalydev.pharmacie.service.VenteService;
 import com.moussalydev.pharmacie.service.dto.VenteDTO;
 import com.moussalydev.pharmacie.web.rest.errors.BadRequestAlertException;
+import com.moussalydev.pharmacie.web.rest.errors.StockInsuffisantException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -55,10 +56,13 @@ public class VenteResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/ventes")
-    public ResponseEntity<VenteDTO> createVente(@RequestBody VenteDTO venteDTO) throws URISyntaxException {
+    public ResponseEntity<VenteDTO> createVente(@RequestBody VenteDTO venteDTO) throws URISyntaxException, StockInsuffisantException {
         log.debug("REST request to save Vente : {}", venteDTO);
         if (venteDTO.getId() != null) {
             throw new BadRequestAlertException("A new vente cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if (venteDTO.getMedicament().getStock() < venteDTO.getNombre()) {
+            throw new StockInsuffisantException("Attention Le stock est insuffisant");
         }
         VenteDTO result = venteService.save(venteDTO);
         return ResponseEntity
