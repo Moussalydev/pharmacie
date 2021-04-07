@@ -15,6 +15,8 @@ public class VenteDTO implements Serializable {
 
     private Integer nombre;
 
+    private Double total;
+
     private MedicamentDTO medicament;
 
     public Long getId() {
@@ -39,6 +41,14 @@ public class VenteDTO implements Serializable {
 
     public void setNombre(Integer nombre) {
         this.nombre = nombre;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public MedicamentDTO getMedicament() {
@@ -77,6 +87,7 @@ public class VenteDTO implements Serializable {
             "id=" + getId() +
             ", date='" + getDate() + "'" +
             ", nombre=" + getNombre() +
+            ", total=" + getTotal() +
             ", medicament=" + getMedicament() +
             "}";
     }

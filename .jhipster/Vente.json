@@ -8,6 +8,10 @@
     {
       "fieldName": "nombre",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "total",
+      "fieldType": "Double"
     }
   ],
   "relationships": [

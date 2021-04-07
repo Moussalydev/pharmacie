@@ -42,10 +42,10 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call Medicament query and add missing value', () => {
         const vente: IVente = { id: 456 };
-        const medicament: IMedicament = { id: 94926 };
+        const medicament: IMedicament = { id: 16742 };
         vente.medicament = medicament;
 
-        const medicamentCollection: IMedicament[] = [{ id: 84361 }];
+        const medicamentCollection: IMedicament[] = [{ id: 32201 }];
         spyOn(medicamentService, 'query').and.returnValue(of(new HttpResponse({ body: medicamentCollection })));
         const additionalMedicaments = [medicament];
         const expectedCollection: IMedicament[] = [...additionalMedicaments, ...medicamentCollection];
@@ -61,7 +61,7 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const vente: IVente = { id: 456 };
-        const medicament: IMedicament = { id: 24855 };
+        const medicament: IMedicament = { id: 81067 };
         vente.medicament = medicament;
 
         activatedRoute.data = of({ vente });

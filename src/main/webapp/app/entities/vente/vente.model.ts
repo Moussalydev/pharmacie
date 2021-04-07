@@ -5,6 +5,7 @@ export interface IVente {
   id?: number;
   date?: dayjs.Dayjs | null;
   nombre?: number | null;
+  total?: number | null;
   medicament?: IMedicament | null;
 }
 
@@ -13,6 +14,7 @@ export class Vente implements IVente {
     public id?: number,
     public date?: dayjs.Dayjs | null,
     public nombre?: number | null,
+    public total?: number | null,
     public medicament?: IMedicament | null
   ) {}
 }

@@ -24,6 +24,9 @@ public class Vente implements Serializable {
     @Column(name = "nombre")
     private Integer nombre;
 
+    @Column(name = "total")
+    private Double total;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "categorie", "user" }, allowSetters = true)
     private Medicament medicament;
@@ -68,6 +71,19 @@ public class Vente implements Serializable {
         this.nombre = nombre;
     }
 
+    public Double getTotal() {
+        return this.total;
+    }
+
+    public Vente total(Double total) {
+        this.total = total;
+        return this;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
     public Medicament getMedicament() {
         return this.medicament;
     }
@@ -107,6 +123,7 @@ public class Vente implements Serializable {
             "id=" + getId() +
             ", date='" + getDate() + "'" +
             ", nombre=" + getNombre() +
+            ", total=" + getTotal() +
             "}";
     }
 }

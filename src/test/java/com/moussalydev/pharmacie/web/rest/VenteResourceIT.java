@@ -42,6 +42,9 @@ class VenteResourceIT {
     private static final Integer DEFAULT_NOMBRE = 1;
     private static final Integer UPDATED_NOMBRE = 2;
 
+    private static final Double DEFAULT_TOTAL = 1D;
+    private static final Double UPDATED_TOTAL = 2D;
+
     private static final String ENTITY_API_URL = "/api/ventes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -69,7 +72,7 @@ class VenteResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Vente createEntity(EntityManager em) {
-        Vente vente = new Vente().date(DEFAULT_DATE).nombre(DEFAULT_NOMBRE);
+        Vente vente = new Vente().date(DEFAULT_DATE).nombre(DEFAULT_NOMBRE).total(DEFAULT_TOTAL);
         return vente;
     }
 
@@ -80,7 +83,7 @@ class VenteResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Vente createUpdatedEntity(EntityManager em) {
-        Vente vente = new Vente().date(UPDATED_DATE).nombre(UPDATED_NOMBRE);
+        Vente vente = new Vente().date(UPDATED_DATE).nombre(UPDATED_NOMBRE).total(UPDATED_TOTAL);
         return vente;
     }
 
@@ -105,6 +108,7 @@ class VenteResourceIT {
         Vente testVente = venteList.get(venteList.size() - 1);
         assertThat(testVente.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testVente.getNombre()).isEqualTo(DEFAULT_NOMBRE);
+        assertThat(testVente.getTotal()).isEqualTo(DEFAULT_TOTAL);
     }
 
     @Test
@@ -139,7 +143,8 @@ class VenteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(vente.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
-            .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE)));
+            .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE)))
+            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())));
     }
 
     @Test
@@ -155,7 +160,8 @@ class VenteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(vente.getId().intValue()))
             .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)))
-            .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE));
+            .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE))
+            .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.doubleValue()));
     }
 
     @Test
@@ -177,7 +183,7 @@ class VenteResourceIT {
         Vente updatedVente = venteRepository.findById(vente.getId()).get();
         // Disconnect from session so that the updates on updatedVente are not directly saved in db
         em.detach(updatedVente);
-        updatedVente.date(UPDATED_DATE).nombre(UPDATED_NOMBRE);
+        updatedVente.date(UPDATED_DATE).nombre(UPDATED_NOMBRE).total(UPDATED_TOTAL);
         VenteDTO venteDTO = venteMapper.toDto(updatedVente);
 
         restVenteMockMvc
@@ -194,6 +200,7 @@ class VenteResourceIT {
         Vente testVente = venteList.get(venteList.size() - 1);
         assertThat(testVente.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testVente.getNombre()).isEqualTo(UPDATED_NOMBRE);
+        assertThat(testVente.getTotal()).isEqualTo(UPDATED_TOTAL);
     }
 
     @Test
@@ -273,7 +280,7 @@ class VenteResourceIT {
         Vente partialUpdatedVente = new Vente();
         partialUpdatedVente.setId(vente.getId());
 
-        partialUpdatedVente.nombre(UPDATED_NOMBRE);
+        partialUpdatedVente.nombre(UPDATED_NOMBRE).total(UPDATED_TOTAL);
 
         restVenteMockMvc
             .perform(
@@ -289,6 +296,7 @@ class VenteResourceIT {
         Vente testVente = venteList.get(venteList.size() - 1);
         assertThat(testVente.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testVente.getNombre()).isEqualTo(UPDATED_NOMBRE);
+        assertThat(testVente.getTotal()).isEqualTo(UPDATED_TOTAL);
     }
 
     @Test
@@ -303,7 +311,7 @@ class VenteResourceIT {
         Vente partialUpdatedVente = new Vente();
         partialUpdatedVente.setId(vente.getId());
 
-        partialUpdatedVente.date(UPDATED_DATE).nombre(UPDATED_NOMBRE);
+        partialUpdatedVente.date(UPDATED_DATE).nombre(UPDATED_NOMBRE).total(UPDATED_TOTAL);
 
         restVenteMockMvc
             .perform(
@@ -319,6 +327,7 @@ class VenteResourceIT {
         Vente testVente = venteList.get(venteList.size() - 1);
         assertThat(testVente.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testVente.getNombre()).isEqualTo(UPDATED_NOMBRE);
+        assertThat(testVente.getTotal()).isEqualTo(UPDATED_TOTAL);
     }
 
     @Test

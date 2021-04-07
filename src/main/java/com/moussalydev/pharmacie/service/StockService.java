@@ -32,6 +32,7 @@ public class StockService {
 
     public Vente Vendre(Vente vente) {
         vente.setDate(maintenant);
+        vente.setTotal(vente.getMedicament().getPrix() * vente.getNombre());
         vente = venteRepository.save(vente);
         Medicament medicament = medicamentRepository.findById(vente.getMedicament().getId()).get();
         newstock = medicament.getStock() - vente.getNombre();

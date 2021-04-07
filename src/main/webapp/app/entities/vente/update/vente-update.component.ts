@@ -26,6 +26,7 @@ export class VenteUpdateComponent implements OnInit {
     id: [],
     date: [],
     nombre: [],
+    total: [],
     medicament: [],
   });
 
@@ -91,6 +92,7 @@ export class VenteUpdateComponent implements OnInit {
       id: vente.id,
       date: vente.date ? vente.date.format(DATE_TIME_FORMAT) : null,
       nombre: vente.nombre,
+      total: vente.total,
       medicament: vente.medicament,
     });
 
@@ -118,6 +120,7 @@ export class VenteUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       date: this.editForm.get(['date'])!.value ? dayjs(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       nombre: this.editForm.get(['nombre'])!.value,
+      total: this.editForm.get(['total'])!.value,
       medicament: this.editForm.get(['medicament'])!.value,
     };
   }

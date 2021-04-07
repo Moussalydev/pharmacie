@@ -28,6 +28,7 @@ describe('Service Tests', () => {
         id: 0,
         date: currentDate,
         nombre: 0,
+        total: 0,
       };
     });
 
@@ -76,6 +77,7 @@ describe('Service Tests', () => {
             id: 1,
             date: currentDate.format(DATE_TIME_FORMAT),
             nombre: 1,
+            total: 1,
           },
           elemDefault
         );
@@ -98,6 +100,7 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             nombre: 1,
+            total: 1,
           },
           new Vente()
         );
@@ -124,6 +127,7 @@ describe('Service Tests', () => {
             id: 1,
             date: currentDate.format(DATE_TIME_FORMAT),
             nombre: 1,
+            total: 1,
           },
           elemDefault
         );
@@ -180,7 +184,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Vente to an array', () => {
-          const venteArray: IVente[] = [{ id: 123 }, { id: 456 }, { id: 88957 }];
+          const venteArray: IVente[] = [{ id: 123 }, { id: 456 }, { id: 28292 }];
           const venteCollection: IVente[] = [{ id: 123 }];
           expectedResult = service.addVenteToCollectionIfMissing(venteCollection, ...venteArray);
           expect(expectedResult).toHaveLength(3);
